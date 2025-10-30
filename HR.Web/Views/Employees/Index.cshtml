@@ -1,0 +1,64 @@
+﻿@model IEnumerable<HR.Domain.Employees.Employee>
+@{
+    ViewData["Title"] = "Employees";
+}
+<div class="d-flex align-items-center justify-content-between">
+    <h2>Employees</h2>
+    <a asp-action="Create" class="btn btn-primary">+ New Employee</a>
+</div>
+
+@if (TempData["OK"] != null)
+{
+    <div class="alert alert-success mt-3">@TempData["OK"]</div>
+}
+
+<form method="get" class="row g-2 my-3">
+    <div class="col-md-4">
+        <input name="q" value="@ViewBag.Query" class="form-control" placeholder="Search name / NIC / email" />
+    </div>
+    <div class="col-md-3">
+        <select name="departmentId" asp-items="ViewBag.Departments" class="form-select">
+            <option value="">All Departments</option>
+        </select>
+    </div>
+    <div class="col-md-3">
+        <select name="categoryId" asp-items="ViewBag.Categories" class="form-select">
+            <option value="">All Categories</option>
+        </select>
+    </div>
+    <div class="col-md-2 d-grid">
+        <button class="btn btn-outline-primary">Filter</button>
+    </div>
+</form>
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Full Name</th>
+            <th>Department</th>
+            <th>Designation</th>
+            <th>Category</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th style="width:200px;"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var e in Model)
+        {
+            <tr>
+                <td>@e.FullName</td>
+                <td>@e.Department?.Name</td>
+                <td>@e.Designation?.Name</td>
+                <td>@e.EmployeeCategory?.Name</td>
+                <td>@e.Email</td>
+                <td>@e.Phone</td>
+                <td class="text-end">
+                    <a asp-action="Details" asp-route-id="@e.Id" class="btn btn-sm btn-secondary">View</a>
+                    <a asp-action="Edit" asp-route-id="@e.Id" class="btn btn-sm btn-warning">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@e.Id" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
