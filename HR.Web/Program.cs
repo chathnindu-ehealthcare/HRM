@@ -29,6 +29,13 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(o =>
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages(); // Identity UI uses Razor Pages
 
+// (optional but recommended) tell cookies where the login page lives
+builder.Services.ConfigureApplicationCookie(o =>
+{
+    o.LoginPath = "/Identity/Account/Login";
+    o.AccessDeniedPath = "/Identity/Account/AccessDenied";
+});
+
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
@@ -50,4 +57,10 @@ app.MapControllerRoute(
 app.MapRazorPages(); // expose /Identity/... endpoints
 
 await HR.Web.Seed.IdentitySeeder.SeedAsync(app.Services); // step 7 below
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    await HR.Infrastructure.Data.Seed.InitialSeed.RunAsync(db);
+}
 app.Run();
+
