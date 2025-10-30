@@ -1,0 +1,71 @@
+﻿@model HR.Domain.Employees.Employee
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="mb-3">
+            <label asp-for="FullName" class="form-label"></label>
+            <input asp-for="FullName" class="form-control" />
+            <span asp-validation-for="FullName" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="NIC" class="form-label"></label>
+            <input asp-for="NIC" class="form-control" />
+            <span asp-validation-for="NIC" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Address" class="form-label"></label>
+            <input asp-for="Address" class="form-control" />
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Email" class="form-label"></label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Phone" class="form-label"></label>
+            <input asp-for="Phone" class="form-control" />
+            <span asp-validation-for="Phone" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="mb-3">
+            <label class="form-label">Department</label>
+            <select asp-for="DepartmentId" asp-items="ViewBag.Departments" class="form-select"></select>
+            <span asp-validation-for="DepartmentId" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Designation</label>
+            <select asp-for="DesignationId" asp-items="ViewBag.Designations" class="form-select"></select>
+            <span asp-validation-for="DesignationId" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Category</label>
+            <select asp-for="EmployeeCategoryId" asp-items="ViewBag.Categories" class="form-select"></select>
+            <span asp-validation-for="EmployeeCategoryId" class="text-danger"></span>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label asp-for="EpfNo" class="form-label"></label>
+                <input asp-for="EpfNo" class="form-control" />
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="EtfNo" class="form-label"></label>
+                <input asp-for="EtfNo" class="form-control" />
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="DateOfJoining" class="form-label"></label>
+            <input asp-for="DateOfJoining" class="form-control" type="date" />
+        </div>
+
+        <div class="form-check mb-3">
+            <input class="form-check-input" asp-for="IsActive" />
+            <label class="form-check-label" asp-for="IsActive"></label>
+        </div>
+    </div>
+</div>

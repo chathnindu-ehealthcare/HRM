@@ -1,0 +1,15 @@
+﻿@model HR.Domain.Employees.Employee
+@{
+    ViewData["Title"] = "Edit Employee";
+}
+<h2>Edit Employee</h2>
+<hr />
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+    @Html.Partial("_Form", Model)
+    <button class="btn btn-primary">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
